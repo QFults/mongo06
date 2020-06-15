@@ -19,6 +19,11 @@
   "homepage": "https://github.com/QFults/mongo06#readme",
   "dependencies": {
     "express": "^4.17.1",
-    "mongoose": "^5.9.19"
+    "jsonwebtoken": "^8.5.1",
+    "mongoose": "^5.9.19",
+    "passport": "^0.4.1",
+    "passport-jwt": "^4.0.0",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^6.0.1"
   }
 }
