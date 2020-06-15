@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const { join } = require('path')
 const passport = require('passport')
@@ -16,9 +17,15 @@ app.use(passport.session())
 
 passport.use(new Strategy(User.authenticate()))
 passport.serializeUser(User.serializeUser())
-passport.deserializeUser(User.deserializeUser())
+passport.deserializeUser((User.deserializeUser()))
 
-
+passport.use(new JWTStrategy({
+  jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
+  secretOrKey: process.env.SECRET
+}, ({ id }, cb) => User.findById(id)
+  .populate('posts')
+  .then(user => cb(null, user))
+  .catch(err => cb(err))))
 
 app.use(require('./routes'))
 
