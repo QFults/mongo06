@@ -2,7 +2,7 @@ const router = require('express').Router()
 const { Post, User } = require('../models')
 const passport = require('passport')
 
-router.get('/posts', passport.authenticate('jwt'),(req, res) => {
+router.get('/posts', passport.authenticate('jwt'), (req, res) => {
   Post.find()
     .populate('author')
     .then(posts => res.json(posts))

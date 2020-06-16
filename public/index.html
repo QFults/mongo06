@@ -7,5 +7,20 @@
 </head>
 <body>
   
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  <script>
+    if (localStorage.getItem('user')) {
+        axios.get('/api/users/authorize', {
+          headers: {
+            'Authorization': `Bearer ${localStorage.getItem('user')}`
+          }
+        })
+          .catch(err => {
+            window.location = '/auth.html'
+          })
+      } else {
+        window.location = '/auth.html'
+      }
+  </script>
 </body>
 </html>

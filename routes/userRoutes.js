@@ -16,12 +16,16 @@ router.post('/users/register', (req, res) => {
 router.post('/users/login', (req, res) => {
   User.authenticate()(req.body.username, req.body.password, (err, user) => {
     if (err) { console.error(err) }
-    res.json(user ? jwt.sign({ id: user._id}, process.env.SECRET) : null)
+    res.json(user ? jwt.sign({ id: user._id }, process.env.SECRET) : null)
   })
 })
 
 router.get('/users/posts', passport.authenticate('jwt'), (req, res) => {
   res.json(req.user)
+})
+
+router.get('/users/authorize', passport.authenticate('jwt'), (req, res) => {
+  res.sendStatus(200)
 })
 
 // router.get('/users/:id', (req, res) => {
